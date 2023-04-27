@@ -1,0 +1,36 @@
+#2023-04-27 8주차 c언어 수업
+3주차 예제
+```
+#include <stdio.h>
+
+int main(void) {
+  int x = 0;
+  int y = 010;
+  int z = 0x10;
+
+  printf("x = %d\n", x);
+  printf("y = %d\n", y);
+  printf("z = %d\n", z);
+  return 0;
+}
+```
+#include <stdio.h>
+
+int max(int x, int y){
+  if(x>y)
+    return x;
+  else 
+    return y;
+}
+int main(void) {
+  int x, y, larger;
+
+  printf("정수 2개를 입력하시오: ");
+  scanf("%d %d", &x, &y);
+
+  larger= max(x, y);
+  printf("더 큰 값은 %d입니다. \n",larger);
+
+  return 0;
+}
+```
