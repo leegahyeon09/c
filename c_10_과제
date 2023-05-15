@@ -1,0 +1,30 @@
+동전던지기.c
+```
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+int coin_toss(void);
+ 
+int main(void) {
+	int toss;  //동전을 던지는 횟수
+	int heads = 0;  //동전의 앞면 초기화
+	int tails = 0;  //동전의 뒷면 초기화
+	srand((unsigned)time(NULL));  //난수 생성
+
+	for (toss = 0; toss < 100; toss++) {  //100번 반복
+		if (coin_toss() == 1)  //난수가 1일경우 앞면 
+			heads++;
+		else  //뒷면일 경우
+			tails++;
+	}
+	printf("동전의 앞면: %d\n", heads);
+	printf("동전의 뒷면: %d\n", tails);
+	return 0;
+}
+int coin_toss(void)
+{
+	int head = rand() % 2;  //rand()를 이용해 난수를 발생시키며 난수는 앞면 아니면 뒷면만 나오기에 %연산자 이용해 범위제한
+	return head;
+}
+```
