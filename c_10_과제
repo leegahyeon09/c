@@ -28,3 +28,176 @@ int coin_toss(void)
 	return head;
 }
 ```
+자동차게임.c
+#include <stdlib.h>
+#include <stdio.h>
+#include <conio.h>
+#include <time.h>
+
+void disp_car(int car_number, int distance)
+{
+	int i;
+	printf("CAR #%d: ", car_number);
+	for (i = 0; i < distance / 10; i++) {  //자동차가 주행한 거리만큼 * 출력
+		printf("*");
+	}
+	printf("\n");
+}
+	int main(void)
+	{
+		int i;
+		int car1_dist = 0, car2_dist = 0;
+
+		srand((unsigned)time(NULL));  //난수 생성
+
+		for (i = 0; i < 6; i++) {  //6번 반복
+			car1_dist += rand() % 100;  //rand()를 이용해 난수를 발생
+			car2_dist += rand() % 100;  //난수의 범위는 %연산자를 사용해 0부터 99까지로 제한
+			disp_car(1, car1_dist);
+			disp_car(2, car2_dist);
+			printf("---------------\n");
+			_getch();  //사용자가 아무키를 누름
+		}
+		return 0;
+	}
+```
+
+시간맞추기.c
+#include <stdio.h>
+#include <time.h>
+
+int main(void) {
+	time_t start, end;
+	start = time(NULL);  //시작시간
+	printf("10초가 되면 아무 키나 누르세요\n");
+	while (1) {
+		if (getchar())  //사용자가 키를 누른다면
+			break;  //멈춤
+	}
+	printf("종료되었습니다. \n");
+	end = time(NULL);  //종료시간
+	printf("경과된 시간은 %d 초입니다.\n", end - start);  //경과된 시간 출력
+	return 0;
+}
+```
+
+나무 높이 측정.c
+#define _CRE_SECURE_NO_WARNINGS
+#include <math.h>
+#include <stdio.h>
+
+int main(void) {
+	double height, distance, tree_height, degrees, radians;
+
+	printf("나무와의 길이(단위는 미터): ");
+	scanf("%lf", &distance);  //거리를 입력받음
+
+	printf("측정자의 키(단위는 미터): ");
+	scanf("%lf", &height);  //키를 입력받음
+
+	printf("각도(단위는 도): ");
+	scanf("%lf", &degrees);  //각도를 입력받음
+
+	radians = degrees * (3.141592 / 180.0);  //리디안으로 변환
+
+	tree_height = tan(radians) * distance + height;  //나무의 높이 구하는 방법
+	printf("나무의 높이(단위는 미터): %lf\n", tree_height);
+
+	return 0;
+}
+```
+
+삼각함수 그리기.c
+#include <math.h>
+#include <stdio.h>
+#define PI 3.141592
+
+double rad(double degree)  //리디안을 도(degree)로 변환하는 함수
+{
+	return PI * degree / 180.0;
+}
+void drawbar(int height) {
+	for (int i = 0; i < height; i++) {  //i를 반복하는 식
+		printf("*");
+	}
+	printf("\n");
+}
+
+int main(void) {
+	int degree, x, y;
+	for (degree = 0; degree <= 90; degree += 10) {  //degree = degree + 10, 싸인값은 -1.0에서 1.0이므로 정수로 반올림하여 증폭
+		y = (int)(60 * sin(rad((double)degree)) + 0.5);
+		drawbar(y);
+	}
+	return 0;
+}
+```
+
+공학용 계산기 프로그램.c
+#include <stdio.h>
+#include <math.h>
+
+int menu(void) {
+	int n;
+	printf("1.팩토리얼\n");
+	printf("2.싸인\n");
+	printf("3.로그(base 10)\n");
+	printf("4.제곱근\n");
+	printf("5.순열(nPr)\n");
+	printf("6.조합(nCr)\n");
+	printf("7.종료\n");
+	printf("선택해주세요: ");
+	scanf_s("%d", &n);  //메뉴를 사용자에게 입력받음
+	return n;
+}
+
+void factorial() {
+	long long n, result = 1, i;
+	printf("정수를 입력하시오: ");
+	scanf_s("%lld", &n);
+	for (i = 1; i <= n; i++) {
+		result = result * i;  //4!이면 1*2*3*4
+	}
+	printf("결과 = %lld\n\n", result);
+}
+void sine() {
+	double a, result;  //사인 함수
+	printf("각도를 입력하시오: ");
+	scanf_s("%lf", &a);
+	result = sin(a);
+	printf("결과 = %lf\n\n", result);
+}
+void logBase10() {
+	double a, result;
+	printf("실수값을 입력하시오: ");
+	scanf_s("%lf", &a);
+	if (a <= 0.0) {  //a가 0이거나 음수이면 로그X
+		printf("오류 \n");
+	}
+	else {
+		result = log10(a);  //로그로 표현
+		printf("결과 = %lf\n\n", result);
+	}
+}
+int main(void) {
+	while (1) {  //무한루프문
+		switch (menu()) {  //메뉴 
+		case 1:
+			factorial();
+			break;
+		case 2:
+			sine();
+			break;
+		case 3:
+			logBase10();
+			break;
+		case 7:
+			printf("종료합니다, \n");
+			return 0;
+		default:
+			printf("잘못된 선택입니다. \n");  //다른것을 선택했을 경우
+			break;
+		}
+	}
+}
+```
